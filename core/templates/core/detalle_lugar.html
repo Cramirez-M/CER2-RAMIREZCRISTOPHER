@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+    <h1>{{ lugar.nombre }}</h1>
+    <p><strong>Categoría:</strong> {{ lugar.categoria.nombre }}</p>
+    <p><strong>Ubicación:</strong> {{ lugar.ubicacion }}</p>
+    <p><strong>Año de construcción:</strong> {{ lugar.anio_construccion }}</p>
+    <img src="{{ lugar.imagen }}" width="400">
+    <p>{{ lugar.descripcion }}</p>
+    
+    <a href="{% url 'catalogo' %}">Volver al catálogo</a>
+{% endblock %}

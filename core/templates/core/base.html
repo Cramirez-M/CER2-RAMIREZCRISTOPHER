@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundación Patrimonio Vivo</title>
+</head>
+<body>
+    
+    <nav style="background-color: #eee; padding: 15px; margin-bottom: 20px;">
+        <a href="{% url 'home' %}">Inicio</a> | 
+        <a href="{% url 'catalogo' %}">Catálogo</a>
+    </nav>
+
+    <!-- Aquí adentro Django inyectará el contenido de las otras páginas -->
+    {% block contenido %}
+    {% endblock %}
+
+</body>
+</html>

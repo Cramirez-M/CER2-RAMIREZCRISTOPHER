@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('catalogo/', views.catalogo, name="catalogo" ),
+    path('detalle_lugar/<int:id>/', views.detalle_lugar, name='detalle_lugar'),
+    path('home/', views.home, name = 'home'),
+    path('base/', views.base, name = 'barra_navegable'),
 ]

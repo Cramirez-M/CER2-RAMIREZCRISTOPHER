@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+    <h1>Explora nuestro Catálogo Patrimonial</h1>
+    <hr>
+    
+    {% for lugar in lista_lugares %}
+        <div style="margin-bottom: 30px;">
+            <h2>{{ lugar.nombre }}</h2>
+            <p><strong>Categoría:</strong> {{ lugar.categoria.nombre }}</p>
+            <img src="{{ lugar.imagen }}" alt="{{ lugar.nombre }}" width="300">
+            <br>
+            <a href="{% url 'detalle_lugar' lugar.id %}">Ver detalle completo</a>
+        </div>
+    {% endfor %}
+{% endblock %}
