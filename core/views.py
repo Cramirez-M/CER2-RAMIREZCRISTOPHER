@@ -4,12 +4,14 @@ from .models import LugarPatrimonial
 
 # Esta es la función que creas
 def catalogo(request):
-    #con objects.all, recolectamos todos los datos de la BD (modelos)
+    
+    #con objects.all, recolectamos todos los datos de la BD (modelos) y para filtros -> filter
     lugares = LugarPatrimonial.objects.all()
-
+   
     #alamcenamos los datos en forma de diccionario
     data = {
         'lista_lugares' : lugares
+        
     }
     print(data)
     # 'render' toma la petición, busca el HTML y lo envía al navegador
