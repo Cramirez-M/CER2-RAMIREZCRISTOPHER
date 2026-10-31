@@ -3,7 +3,27 @@
 {% block contenido %}
     <h1>Explora nuestro Catálogo Patrimonial</h1>
     <hr>
-    
+
+    <!-- BARRA DE FILTROS POR CATEGORÍA -->
+    <div style="margin-bottom: 20px;">
+        <strong>Filtrar por: </strong>
+        
+        <!-- Botón para ver todo -->
+        <a href="{% url 'catalogo' %}" style="margin-right: 15px; padding: 5px 10px; background: #ddd; text-decoration: none; border-radius: 5px;">
+            Todos
+        </a>
+
+        <!-- Botones dinámicos de cada categoría -->
+        {% for categoria in lista_categorias %}
+            <a href="{% url 'catalogo_filtro' categoria.id %}" style="margin-right: 15px; padding: 5px 10px; background: #b3d4ff; text-decoration: none; border-radius: 5px;">
+                {{ categoria.nombre }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <!-- LISTA DE LUGARES -->
     {% for lugar in lista_lugares %}
         <div style="margin-bottom: 30px;">
             <h2>{{ lugar.nombre }}</h2>
@@ -12,5 +32,9 @@
             <br>
             <a href="{% url 'detalle_lugar' lugar.id %}">Ver detalle completo</a>
         </div>
+    {% empty %}
+        <!-- Este mensaje solo sale si la categoría existe pero no tiene lugares -->
+        <p>No hay lugares patrimoniales registrados en esta categoría.</p>
     {% endfor %}
+
 {% endblock %}

@@ -21,6 +21,7 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalogo/', views.catalogo, name="catalogo" ),
+    path('catalogo/<int:id_cat>/', views.catalogo, name="catalogo_filtro"),
     path('detalle_lugar/<int:id>/', views.detalle_lugar, name='detalle_lugar'),
     path('home/', views.home, name = 'home'),
     path('base/', views.base, name = 'barra_navegable'),
