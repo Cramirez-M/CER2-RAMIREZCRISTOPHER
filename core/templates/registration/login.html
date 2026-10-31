@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+<div style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    <h2>Iniciar Sesión</h2>
+    <hr>
+    
+    <!-- El formulario envía los datos de forma segura usando el método POST -->
+    <form method="post">
+        <!-- Token de seguridad obligatorio de Django para evitar hackeos -->
+        {% csrf_token %}
+        
+        <!-- Django dibuja automáticamente las casillas de usuario y contraseña aquí -->
+        {{ form.as_p }}
+        
+        <button type="submit" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Entrar
+        </button>
+    </form>
+</div>
+{% endblock %}
