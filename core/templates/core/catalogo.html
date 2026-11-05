@@ -1,40 +1,77 @@
 {% extends 'core/base.html' %}
 
+
 {% block contenido %}
-    <h1>Explora nuestro Catálogo Patrimonial</h1>
-    <hr>
-
-    <!-- BARRA DE FILTROS POR CATEGORÍA -->
-    <div style="margin-bottom: 20px;">
-        <strong>Filtrar por: </strong>
+    <section class="mt-4 mb-5">
         
-        <!-- Botón para ver todo -->
-        <a href="{% url 'catalogo' %}" style="margin-right: 15px; padding: 5px 10px; background: #ddd; text-decoration: none; border-radius: 5px;">
-            Todos
-        </a>
+        <header class="mb-4">
+            <h1 class="h2 fw-bold">Explora nuestro Catálogo Patrimonial</h1>
+        </header>
 
-        <!-- Botones dinámicos de cada categoría -->
-        {% for categoria in lista_categorias %}
-            <a href="{% url 'catalogo_filtro' categoria.id %}" style="margin-right: 15px; padding: 5px 10px; background: #b3d4ff; text-decoration: none; border-radius: 5px;">
-                {{ categoria.nombre }}
+        <!-- nav: Define un bloque de navegación para los filtros -->
+        <nav class="d-flex align-items-center flex-wrap gap-2 mb-4" aria-label="Filtros de categorías">
+            <strong class="me-2">Filtrar por: </strong>
+            
+            <!-- Botón activo simple en azul -->
+            <a href="{% url 'catalogo' %}" class="btn btn-outline-primary btn-sm">
+                Todos
             </a>
-        {% endfor %}
-    </div>
 
-    <hr>
+            <!-- Botones de filtro  -->
+            {% for categoria in lista_categorias %}
+                <a href="{% url 'catalogo_filtro' categoria.id %}" class="btn btn-outline-primary btn-sm">
+                    {{ categoria.nombre }}
+                </a>
+            {% endfor %}
+        </nav>
 
-    <!-- LISTA DE LUGARES -->
-    {% for lugar in lista_lugares %}
-        <div style="margin-bottom: 30px;">
-            <h2>{{ lugar.nombre }}</h2>
-            <p><strong>Categoría:</strong> {{ lugar.categoria.nombre }}</p>
-            <img src="{{ lugar.imagen }}" alt="{{ lugar.nombre }}" width="300">
-            <br>
-            <a href="{% url 'detalle_lugar' lugar.id %}">Ver detalle completo</a>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            
+            {% for lugar in lista_lugares %}
+                <div class="col">
+               
+                    <article class="card h-100 shadow-sm border-0 bg-white">
+                        
+                        <figure class="m-0">
+                            <img src="{{ lugar.imagen }}" alt="Fotografía de {{ lugar.nombre }}" class="card-img-top img-catalogo">
+                        </figure>
+                        
+                        <div class="card-body">
+                            <header>
+                                
+                                <p class="text-muted small mb-1 text-uppercase fw-semibold">{{ lugar.categoria.nombre }}</p>
+                                
+                                <h2 class="card-title h5 fw-bold mb-3">{{ lugar.nombre }}</h2>
+                            </header>
+                        </div>
+                        
+                        <!-- footer semántico para la base de la tarjeta (botones) -->
+                        <footer class="card-footer bg-transparent border-0 pb-4 pt-0">
+                            
+                           
+                            <a href="{% url 'detalle_lugar' lugar.id %}" class="btn btn-primary btn w-100 mb-2">Ver detalles</a>
+                            
+                            {% if user.is_staff %}
+                                <div class="d-flex justify-content-between gap-2 mt-2">
+                                    <a href="{% url 'editar_lugar' lugar.id %}" class="btn btn-outline-secondary btn-sm w-50">Editar</a>
+                                    <a href="{% url 'eliminar_lugar' lugar.id %}" class="btn btn-outline-danger btn-sm w-50">Eliminar</a>
+                                </div>
+                            {% endif %}
+                        </footer>
+                        
+                    </article>
+                </div>
+                
+            {% empty %} 
+                <div class="col-12">
+                    <!-- Alerta simplificada y minimalista -->
+                    <div class="alert alert-light border text-center text-muted py-4" role="alert">
+                        No hay lugares patrimoniales registrados en esta categoría por el momento.
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% empty %}
-        <!-- Este mensaje solo sale si la categoría existe pero no tiene lugares -->
-        <p>No hay lugares patrimoniales registrados en esta categoría.</p>
-    {% endfor %}
 
+    </section>
 {% endblock %}

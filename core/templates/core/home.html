@@ -2,8 +2,43 @@
 
 {% block contenido %}
 
-    <h1>Bienvenido al portal de lugares Patrimonial </h1>
-    <p>bienvenido</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore facere ducimus veniam quae facilis voluptas quas pariatur. Inventore amet provident, nulla corrupti dicta neque tempore vel delectus aliquam repudiandae.</p>
-    <hr>
+
+<!-- conteiner-->
+<div class="container mt-5 pt-5">
+    
+    <!-- align-items-center alinea todo al medio. justify-content-between los separa a los extremos -->
+    <div class="row align-items-center justify-content-between">
+        
+        <!--Ocupa 5 de 12 partes en monitores (col-lg-5) -->
+        <div class="col-lg-5 mb-5 mb-lg-0">
+            
+            <h1 class="display-4 fw-bold text-dark mb-4">
+                DESCUBRE EL PATRIMONIO DE CHILE
+            </h1>
+            
+            <h4 class="text-secondary mb-4">
+                ¿Explorar la historia? ¡Puedes hacerlo!<br>Con Fundación Patrimonio Vivo.
+            </h4>
+            
+            <!-- lead es una clase que hace el texto de párrafo un poco más grande y fácil de leer -->
+            <p class="lead text-muted mb-4">
+                Utilizamos la digitalización para acercarte a los lugares de interés patrimonial. Consigue información de edificios históricos y monumentos en un solo lugar.
+            </p>
+            
+            <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg px-4 py-2 mb-5">
+                Comenzar ahora
+            </a>
+        </div>
+
+        <div class="col-lg-6 text-center mt-2">
+            
+            <!-- img-fluid evita que la foto se desborde de la pantalla en celulares. rounded redondea las esquinas. -->
+            <img src="https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Muestra de Patrimonio" 
+                 class="img-fluid rounded shadow-sm">
+                 
+        </div>
+
+    </div>
+</div>
 {% endblock %}

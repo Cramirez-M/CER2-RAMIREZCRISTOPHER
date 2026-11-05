@@ -20,10 +20,15 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home),
     path('catalogo/', views.catalogo, name="catalogo" ),
     path('catalogo/<int:id_cat>/', views.catalogo, name="catalogo_filtro"),
     path('detalle_lugar/<int:id>/', views.detalle_lugar, name='detalle_lugar'),
     path('home/', views.home, name = 'home'),
     path('base/', views.base, name = 'barra_navegable'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('agregar/', views.agregar_lugar, name="agregar_lugar"),
+    path('editar/<int:id>/', views.editar_lugar, name="editar_lugar"),
+    # Atrapamos la palabra eliminar seguida de un número (ID), y ejecutamos la vista eliminar_lugar
+    path('eliminar/<int:id>/', views.eliminar_lugar, name="eliminar_lugar"),
 ]

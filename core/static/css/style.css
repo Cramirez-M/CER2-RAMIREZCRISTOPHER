@@ -1,0 +1,17 @@
+/* Para la imagen de las tarjetas del catálogo (todas iguales a 220px de alto) */
+.img-catalogo {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Para la imagen de la página de detalles (con un máximo de 450px de alto como tenías antes) */
+.img-detalle {
+    max-height: 450px;
+    width: 100%;
+    object-fit: cover;
+}
+/* style.css */
+.home-body {
+    background-color: #e9ecef !important;
+}

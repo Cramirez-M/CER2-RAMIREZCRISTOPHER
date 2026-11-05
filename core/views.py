@@ -1,25 +1,22 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import LugarPatrimonial, Categoria
+from django.contrib.admin.views.decorators import staff_member_required
+from .forms import LugarPatrimonialForm
 # Create your views here.
 
-# Esta es la función que creas
 def catalogo(request, id_cat=None):
     
-    # Siempre traemos las categorías para dibujar los botones
+    #traemos las categorías para dibujar los botones
     categorias_bd = Categoria.objects.all()
 
-    # Preguntamos: ¿El usuario hizo clic en una categoría y nos mandó un número?
+    # si el usuario clickeo una categoria envia una id
     if id_cat:
         # Buscamos en la BD donde la columna categoria_id sea igual al id_cat que llegó
         lugares = LugarPatrimonial.objects.filter(categoria_id=id_cat)
     else:
-        # Si no mandó número, traemos todos los lugares
+        #si no, mostramos todos los lugares
         lugares = LugarPatrimonial.objects.all()
 
-    print("---------------------------------")
-    print("ID RECIBIDO EN LA URL:", id_cat)
-    print("LUGARES ENCONTRADOS:", lugares)
-    print("---------------------------------")
 
     # Metemos todo a la mochila
     data = {
@@ -39,7 +36,6 @@ def detalle_lugar(request, id):
         'lugar': lugar_encontrado
     }
     
-    # Renderizamos el HTML pasándole el diccionario
     return render(request, 'core/detalle_lugar.html', data)
 
 def base(request):
@@ -47,4 +43,46 @@ def base(request):
 
 def home(request):
     return render (request, 'core/home.html')
+
+@staff_member_required
+def agregar_lugar(request):
+    if request.method == 'POST':
+        form = LugarPatrimonialForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('catalogo')
+
+    else:
+        form = LugarPatrimonialForm()
+    return render(request, 'core/agregar_lugar.html', {'form' : form})
+
+@staff_member_required
+def editar_lugar(request, id):
+    lugar = get_object_or_404(LugarPatrimonial, id=id)
+
+    if request.method == 'POST':
+        form = LugarPatrimonialForm(request.POST, instance=lugar)
+        if form.is_valid():
+            form.save()
+            return redirect('catalogo')
+    else:
+        form = LugarPatrimonialForm(instance=lugar)
+    return render(request, 'core/editar_lugar.html', {'form': form})
+
+
+# solo el personal autorizado
+@staff_member_required
+def eliminar_lugar(request, id):
+    
+    lugar = get_object_or_404(LugarPatrimonial, id=id)
+    
+    # 2. Preguntamos si el usuario envio datos por el formulario
+    if request.method == 'POST':
+        lugar.delete()
+        # 4. Una vez borrado, redirigimos 
+        return redirect('catalogo')
+    
+    # 5. Si el método NO es POST (es decir, el usuario solo hizo clic en el enlace para entrar a la página), mostramos el formulario.
+    
+    return render(request, 'core/eliminar_lugar.html', {'lugar': lugar})
     

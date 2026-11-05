@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+    <h2>Editar Lugar Patrimonial</h2>
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" style="padding: 10px 20px; background: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer;">
+            Actualizar Lugar
+        </button>
+        <a href="{% url 'catalogo' %}" style="margin-left: 10px; text-decoration: none; color: #555;">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

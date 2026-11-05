@@ -1,12 +1,51 @@
 {% extends 'core/base.html' %}
 
 {% block contenido %}
-    <h1>{{ lugar.nombre }}</h1>
-    <p><strong>Categoría:</strong> {{ lugar.categoria.nombre }}</p>
-    <p><strong>Ubicación:</strong> {{ lugar.ubicacion }}</p>
-    <p><strong>Año de construcción:</strong> {{ lugar.anio_construccion }}</p>
-    <img src="{{ lugar.imagen }}" width="400">
-    <p>{{ lugar.descripcion }}</p>
-    
-    <a href="{% url 'catalogo' %}">Volver al catálogo</a>
+
+    <article class="mt-4 mb-5">
+        
+        <!-- nav: Navegación de retorno al catálogo -->
+        <nav class="mb-4" aria-label="Navegación secundaria">
+            <a href="{% url 'catalogo' %}" class="btn btn-outline-primary btn-sm">
+                &larr; Volver al catálogo
+            </a>
+        </nav>
+
+        
+        <div class="row g-4 align-items-start">
+            
+            <!-- COLUMNA IZQUIERDA: Fotografía del patrimonio -->
+            <div class="col-md-6">
+                <figure class="m-0">
+                    <img src="{{ lugar.imagen }}" alt="Fotografía de {{ lugar.nombre }}" class="img-fluid rounded shadow-sm w-100 img-detalle">
+                </figure>
+            </div>
+
+            <!-- COLUMNA DERECHA: Datos e información -->
+            <div class="col-md-6">
+                
+                
+                <header class="mb-3">
+                    <p class="text-muted small text-uppercase fw-semibold mb-1">{{ lugar.categoria.nombre }}</p>
+                    <h1 class="h2 fw-bold text-dark">{{ lugar.nombre }}</h1>
+                </header>
+
+                <!-- section: Ficha de datos específicos (Ubicación y Año) -->
+                <section class="bg-white p-3 rounded border mb-4 shadow-sm">
+                    <p class="mb-2"><strong>Ubicación:</strong> {{ lugar.ubicacion }}</p>
+                    <p class="mb-0"><strong>Año de construcción:</strong> {{ lugar.anio_construccion }}</p>
+                </section>
+
+                <!-- section: Texto descriptivo -->
+                <section class="mb-4">
+                    <h2 class="h6 fw-bold text-uppercase text-muted mb-2">Descripción</h2>
+                    <p class="text-secondary" style="line-height: 1.7;">
+                        {{ lugar.descripcion }}
+                    </p>
+                </section>
+
+            </div>
+        </div>
+
+    </article>
 {% endblock %}
