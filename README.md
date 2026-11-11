@@ -19,7 +19,7 @@ El sistema permite que visitantes y usuarios autenticados consulten lugares patr
 
 ## Requisitos Previos
 
-- Python 3.10 o superior instalado.
+- Python 3.12 o superior instalado.
 - Git instalado en el equipo.
 
 ## Instrucciones de Instalación y Ejecución
@@ -29,8 +29,8 @@ Sigue los siguientes pasos en tu terminal para clonar y ejecutar el proyecto loc
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/CER2-APELLIDONOMBRE.git
-cd CER2-APELLIDONOMBRE
+git clone https://github.com/Cramirez-M/CER2-RAMIREZCRISTOPHER.git
+cd CER2-RAMIREZCRISTOPHER
 ```
 
 ### 2. Crear y activar el entorno virtual
